@@ -99,7 +99,8 @@ void MainWindow::handleInput(const QString &token)
             m_entry = QStringLiteral("0");
             m_entering = true;
         }
-        m_entry += QLatin1Char('.');
+        if (!m_entry.contains(QLatin1Char('.')))
+            m_entry += QLatin1Char('.');    // 已有小数点则忽略，防止 “3.1.4”
         updateDisplay();
         return;
     }
@@ -171,6 +172,15 @@ void MainWindow::handleInput(const QString &token)
         return;
     }
 
+    // ---------- 7. 正负号 ----------
+    if (token == QStringLiteral("SIGN")) {
+        if (m_entry.startsWith(QLatin1Char('-')))
+            m_entry.remove(0, 1);
+        else if (m_entry != QStringLiteral("0"))
+            m_entry.prepend(QLatin1Char('-'));
+        updateDisplay();
+        return;
+    }
 }
 
 bool MainWindow::compute(double &result)
@@ -185,6 +195,10 @@ bool MainWindow::compute(double &result)
     else if (m_pendingOp == QStringLiteral("×"))
         result = lhs * rhs;
     else if (m_pendingOp == QStringLiteral("÷")) {
+        if (qFuzzyIsNull(rhs)) {            // 除数不能为 0
+            showError(QStringLiteral("除数不能为 0"));
+            return false;
+        }
         result = lhs / rhs;
     } else {
         result = rhs;
