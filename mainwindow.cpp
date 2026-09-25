@@ -55,7 +55,41 @@ void MainWindow::connectButtons()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    // TODO: 键盘事件支持将在后续版本实现
+    const int key = event->key();
+    const QString text = event->text();
+    QString token;
+
+    // 键盘按键 → 与按钮完全相同的 token，复用 handleInput
+    if (key >= Qt::Key_0 && key <= Qt::Key_9)
+        token = QString::number(key - Qt::Key_0);
+    else if (key == Qt::Key_Period || text == ".")
+        token = ".";
+    else if (key == Qt::Key_Plus)
+        token = "+";
+    else if (key == Qt::Key_Minus)
+        token = "-";
+    else if (key == Qt::Key_Asterisk)
+        token = "×";
+    else if (key == Qt::Key_Slash)
+        token = "÷";
+    else if (key == Qt::Key_Return || key == Qt::Key_Enter || key == Qt::Key_Equal)
+        token = "=";
+    else if (key == Qt::Key_Backspace)
+        token = "BACK";
+    else if (key == Qt::Key_Escape)
+        token = "C";
+    else if (key == Qt::Key_Delete)
+        token = "CE";
+    else if (text.compare(QStringLiteral("c"), Qt::CaseInsensitive) == 0)
+        token = "C";
+    else if (text.compare(QStringLiteral("n"), Qt::CaseInsensitive) == 0)
+        token = "SIGN";   // 取负
+
+    if (!token.isEmpty()) {
+        handleInput(token);
+        event->accept();
+        return;
+    }
     QMainWindow::keyPressEvent(event);
 }
 
