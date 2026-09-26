@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>计算器</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{background:#f3f3f5;}#centralWidget{background:#f3f3f5;}#displayFrame{background:#ffffff;border-radius:12px;}#lblExpr{color:#8b8b90;font-size:14px;padding-right:10px;}#display{background:transparent;border:none;color:#1c1c1e;font-size:34px;font-weight:600;padding:2px 10px;}QPushButton{background:#ffffff;border:none;border-radius:10px;color:#1c1c1e;font-size:20px;}QPushButton:hover{background:#ececf0;}QPushButton:pressed{background:#dcdce2;}QPushButton#btnClear,QPushButton#btnClearEntry,QPushButton#btnBackspace{background:#e7e7ec;color:#3a3a3c;}QPushButton#btnClear:hover,QPushButton#btnClearEntry:hover,QPushButton#btnBackspace:hover{background:#dcdce2;}QPushButton#btnAdd,QPushButton#btnSub,QPushButton#btnMul,QPushButton#btnDiv{background:#e8f1ff;color:#0a5bd3;font-size:22px;}QPushButton#btnAdd:hover,QPushButton#btnSub:hover,QPushButton#btnMul:hover,QPushButton#btnDiv:hover{background:#d8e8ff;}QPushButton#btnEquals{background:#0a84ff;color:#ffffff;font-size:22px;}QPushButton#btnEquals:hover{background:#2f95ff;}QPushButton#btnEquals:pressed{background:#0060cc;}</string>
+  </property>
   <property name="focusPolicy">
    <enum>Qt::FocusPolicy::StrongFocus</enum>
   </property>
